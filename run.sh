@@ -1,0 +1,1 @@
+java --enable-preview -jar .\target\sga-final.jar

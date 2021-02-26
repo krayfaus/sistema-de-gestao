@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sga.gui.CtrHome">
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
+   <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="230.0" style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets bottom="10.0" top="50.0" />
+         </VBox.margin>
+         <Image url="@img/icons8-study_waifu2x_200.png" />
+      </ImageView>
+      <Label text="Sistema de Gestão de Atividades" textFill="#e7e5e5">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </Label>
+      <Button fx:id="globalMenuButtonHome" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Início" textFill="#e7e5e5">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@img/icons8_Home_32px.png" />
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="globalMenuButtonCourses" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Turmas">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@img/icons8-aula-32.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="globalMenuButtonCoffees" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Cafés">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@img/icons8-buffet-breakfast-32.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="globalMenuButtonMembers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Membros">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@img/icons8_Person_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="globalMenuButtonStages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Etapas">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@img/icons8-intervalo-de-data-32.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="globalMenuButtonSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Configurações">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@img/icons8_Slider__32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="globalMenuButtonExit" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Sair">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@img/icons8_Sign_Out_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+   </VBox>
+   <StackPane fx:id="globalContentPanel" layoutX="230.0" prefHeight="540.0" prefWidth="730.0" style="-fx-background-color: #02030A;">
+      <Pane fx:id="homePanel" prefHeight="540.0" prefWidth="730.0" visible="false">
+         <Label layoutX="57.0" layoutY="25.0" text="Início" textFill="#e7e5e5">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <VBox fx:id="homeInfoStages" alignment="CENTER" layoutX="95.0" layoutY="125.0" prefHeight="130.0" prefWidth="250.0">
+            <children>
+               <Label fx:id="homeInfoStagesCount" layoutX="57.0" layoutY="200.0" text="0" textFill="#2a73ff">
+                  <font>
+                     <Font name="System Bold" size="32.0" />
+                  </font>
+               </Label>
+               <Label layoutX="57.0" layoutY="200.0" text="Etapas" textFill="#e7e5e5">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+         <VBox fx:id="homeInfoCourses" alignment="CENTER" layoutX="385.0" layoutY="125.0" prefHeight="130.0" prefWidth="250.0">
+            <children>
+               <Label fx:id="homeInfoCoursesCount" text="0" textFill="#26bfbc">
+                  <font>
+                     <Font name="System Bold" size="32.0" />
+                  </font>
+               </Label>
+               <Label text="Turmas" textFill="#e7e5e5">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+         <VBox fx:id="homeInfoMembers" alignment="CENTER" layoutX="95.0" layoutY="305.0" prefHeight="130.0" prefWidth="250.0">
+            <children>
+               <Label fx:id="homeInfoMembersCount" layoutX="57.0" layoutY="200.0" text="0" textFill="#fa5f7e">
+                  <font>
+                     <Font name="System Bold" size="32.0" />
+                  </font>
+               </Label>
+               <Label layoutX="57.0" layoutY="200.0" text="Membros" textFill="#e7e5e5">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+         <VBox fx:id="homeInfoCoffees" alignment="CENTER" layoutX="385.0" layoutY="305.0" prefHeight="130.0" prefWidth="250.0">
+            <children>
+               <Label fx:id="homeInfoCoffeesCount" layoutX="57.0" layoutY="200.0" text="0" textFill="#de0000">
+                  <font>
+                     <Font name="System Bold" size="32.0" />
+                  </font>
+               </Label>
+               <Label layoutX="57.0" layoutY="200.0" text="Coffee Breaks" textFill="#e7e5e5">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+      </Pane>
+      <Pane fx:id="coursesPanel" layoutX="10.0" layoutY="10.0" prefHeight="540.0" prefWidth="730.0" visible="false">
+         <Label layoutX="57.0" layoutY="25.0" text="Turmas" textFill="#e7e5e5">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+      </Pane>
+      <Pane fx:id="coffeesPanel" layoutX="10.0" layoutY="10.0" prefHeight="540.0" prefWidth="730.0" visible="false">
+         <Label layoutX="57.0" layoutY="25.0" text="Cafés" textFill="#e7e5e5">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+      </Pane>
+      <Pane fx:id="membersPanel" prefHeight="540.0" prefWidth="730.0" visible="false">
+         <Label layoutX="57.0" layoutY="25.0" text="Membros" textFill="#e7e5e5">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <HBox alignment="CENTER_LEFT" layoutY="100.0" prefHeight="40.0" prefWidth="730.0" spacing="80.0" style="-fx-background-color: #02030A;">
+            <Label text="Matrícula" textFill="#e7e5e5">
+               <HBox.margin>
+                  <Insets left="60.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Nome Completo" textFill="#e7e5e5">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </HBox>
+         <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="140.0" prefHeight="335.0" prefWidth="700.0" style="-fx-background-color: #FF;" stylesheets="@button_style.css">
+            <VBox fx:id="membersList" prefHeight="335.0" prefWidth="700.0" spacing="5.0" style="-fx-background-color: #02030A;">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </ScrollPane>
+         <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <Button fx:id="membersButtonRegister" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="CADASTRAR" textFill="WHITE" />
+      </Pane>
+      <Pane fx:id="stagesPanel" layoutX="10.0" layoutY="10.0" prefHeight="540.0" prefWidth="730.0" visible="false">
+         <Label layoutX="57.0" layoutY="25.0" text="Etapas" textFill="#e7e5e5">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+      </Pane>
+      <Pane fx:id="settingsPanel" prefHeight="530.0" prefWidth="730.0" visible="false">
+         <children>
+            <Label layoutX="57.0" layoutY="25.0" text="Configurações" textFill="#e7e5e5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Label layoutX="57.0" layoutY="107.0" stylesheets="@settings_style.css" text="Apagar o banco de dados" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="settingsCheckboxEraseDatabase" layoutX="317.0" layoutY="109.0" mnemonicParsing="false" stylesheets="@settings_style.css" />
+            <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Button fx:id="settingsButtonAbout" layoutX="57.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackRegistration" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #FCBB31;" text="SOBRE" textFill="WHITE" />
+            <Button fx:id="settingsButtonSave" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackSaveSettings" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="SALVAR" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="memberRegistrationPanel" layoutX="10.0" layoutY="10.0" prefHeight="530.0" prefWidth="730.0" visible="false">
+         <children>
+            <Label layoutX="57.0" layoutY="25.0" text="Cadastro Membro" textFill="#e7e5e5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Label layoutX="67.0" layoutY="107.0" text="Nome" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="memberRegistrationName" layoutX="57.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-text-fill: #FFFFFF;" styleClass="text-input" />
+            <Label layoutX="397.0" layoutY="107.0" text="Sobrenome" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="memberRegistrationSurname" layoutX="387.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-text-fill: #FFFFFF;" />
+            <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Button fx:id="memberRegistrationButtonSave" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackRegistration" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="SALVAR" textFill="WHITE" />
+         </children>
+      </Pane>
+   </StackPane>
+</AnchorPane>

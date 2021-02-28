@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import sga.util.Pair;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Esse record representa uma pessoa cadastrada no sistema.
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public record Member(String id,
                      String name,
                      String surname,
-                     ArrayList<Pair<String, String>> stages) {
+                     List<Pair<String, String>> stages) {
 
     public Member(String id, String name, String surname) {
         this(id, name, surname, new ArrayList<>());

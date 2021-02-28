@@ -1,11 +1,14 @@
 package sga.core;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import sga.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,6 @@ public class MemberDao implements Dao<Member> {
 
     public MemberDao(MongoCollection<Document> collection) {
         this.members = collection;
-        System.out.println(members.toString());
     }
 
     @Override
@@ -34,7 +36,13 @@ public class MemberDao implements Dao<Member> {
         if (doc != null) {
             String name = doc.get("name").toString();
             String surname = doc.get("surname").toString();
-            member = new Member(id, name, surname);
+            List<Pair<String, String>> stages = new ArrayList<>();
+            for (Document stage : (List<Document>) doc.get("stages")) {
+                stages.add(new Pair(
+                        stage.get("first").toString(),
+                        stage.get("second").toString()));
+            }
+            member = new Member(id, name, surname, stages);
         }
 
         return Optional.ofNullable(member);
@@ -51,7 +59,13 @@ public class MemberDao implements Dao<Member> {
                 String id = doc.get("id").toString();
                 String name = doc.get("name").toString();
                 String surname = doc.get("surname").toString();
-                all.add(new Member(id, name, surname));
+                List<Pair<String, String>> stages = new ArrayList<>();
+                for (Document stage : (List<Document>) doc.get("stages")) {
+                    stages.add(new Pair(
+                            stage.get("first").toString(),
+                            stage.get("second").toString()));
+                }
+                all.add(new Member(id, name, surname, stages));
             }
         } finally {
             cursor.close();

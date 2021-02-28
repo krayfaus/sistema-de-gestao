@@ -1,7 +1,9 @@
 package sga.core;
 
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Esse record representa uma sala (de curso/café) cadastrada no sistema.
@@ -16,30 +18,32 @@ import java.util.ArrayList;
 public record Room(String id,
                    String name,
                    Integer capacity,
-                   ArrayList<ArrayList<String>> member_ids) {
+                   List<List<String>> member_ids) {
 
     public Room(String id, String title, Integer capacity) {
         this(id, title, capacity, new ArrayList<>());
+        member_ids.add(new ArrayList<>()); // Stage 1
+        member_ids.add(new ArrayList<>()); // Stage 2
     }
 
-    public void addMember(Integer stage, Member member) {
-        ArrayList<String> stage_ids = member_ids.get(stage);
+    public void addMember(Integer stage, String member_id) {
+        List<String> stage_ids = member_ids.get(stage);
         if (stage_ids == null) {
             member_ids.add(stage, new ArrayList<>());
             stage_ids = member_ids.get(stage);
         }
-        stage_ids.add(member.id());
+        stage_ids.add(member_id);
     }
 
     public void removeMember(Integer stage, Member member) {
-        ArrayList<String> stage_ids = member_ids.get(stage);
+        List<String> stage_ids = member_ids.get(stage);
         if (stage_ids != null) {
             stage_ids.remove(member.id());
         }
     }
 
     public Integer memberCount(Integer stage) {
-        ArrayList<String> stage_ids = member_ids.get(stage);
+        List<String> stage_ids = member_ids.get(stage);
         if (stage_ids == null) {
             return 0;
         }

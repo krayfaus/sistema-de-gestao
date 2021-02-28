@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
@@ -73,16 +74,6 @@
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@img/icons8_Person_32px.png" />
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="50.0" />
-         </padding>
-      </Button>
-      <Button fx:id="globalMenuButtonStages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="42.0" prefWidth="230.0" stylesheets="@button_style.css" text="Etapas">
-         <graphic>
-            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@img/icons8-intervalo-de-data-32.png" />
             </ImageView>
          </graphic>
          <padding>
@@ -167,7 +158,7 @@
                      <Font name="System Bold" size="32.0" />
                   </font>
                </Label>
-               <Label layoutX="57.0" layoutY="200.0" text="Coffee Breaks" textFill="#e7e5e5">
+               <Label layoutX="57.0" layoutY="200.0" text="Cafés" textFill="#e7e5e5">
                   <font>
                      <Font size="16.0" />
                   </font>
@@ -182,6 +173,31 @@
             </font>
          </Label>
          <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <HBox alignment="CENTER_LEFT" layoutY="100.0" prefHeight="40.0" prefWidth="730.0" spacing="80.0" style="-fx-background-color: #02030A;">
+            <children>
+               <Label text="Código" textFill="#e7e5e5">
+                  <HBox.margin>
+                     <Insets left="60.0" />
+                  </HBox.margin>
+               </Label>
+               <Label text="Nome da Sala" textFill="#e7e5e5">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </Label>
+            </children>
+         </HBox>
+         <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="140.0" prefHeight="335.0" prefWidth="700.0" style="-fx-background-color: #02030A;" stylesheets="@button_style.css">
+            <content>
+               <VBox fx:id="coursesList" prefHeight="335.0" prefWidth="700.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                  <padding>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </padding>
+               </VBox>
+            </content>
+         </ScrollPane>
+         <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <Button fx:id="coursesButtonRegister" layoutX="543.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: #CE201C;" text="CADASTRAR NOVO" textFill="WHITE" />
       </Pane>
       <Pane fx:id="coffeesPanel" layoutX="10.0" layoutY="10.0" prefHeight="540.0" prefWidth="730.0" visible="false">
          <Label layoutX="57.0" layoutY="25.0" text="Cafés" textFill="#e7e5e5">
@@ -190,6 +206,31 @@
             </font>
          </Label>
          <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <HBox alignment="CENTER_LEFT" layoutY="100.0" prefHeight="40.0" prefWidth="730.0" spacing="80.0" style="-fx-background-color: #02030A;">
+            <children>
+               <Label text="Código" textFill="#e7e5e5">
+                  <HBox.margin>
+                     <Insets left="60.0" />
+                  </HBox.margin>
+               </Label>
+               <Label text="Nome do Café" textFill="#e7e5e5">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </Label>
+            </children>
+         </HBox>
+         <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="140.0" prefHeight="335.0" prefWidth="700.0" style="-fx-background-color: #02030A;" stylesheets="@button_style.css">
+            <content>
+               <VBox fx:id="coffeesList" prefHeight="335.0" prefWidth="700.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                  <padding>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </padding>
+               </VBox>
+            </content>
+         </ScrollPane>
+         <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <Button fx:id="coffeesButtonRegister" layoutX="543.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: #CE201C;" text="CADASTRAR NOVO" textFill="WHITE" />
       </Pane>
       <Pane fx:id="membersPanel" prefHeight="540.0" prefWidth="730.0" visible="false">
          <Label layoutX="57.0" layoutY="25.0" text="Membros" textFill="#e7e5e5">
@@ -210,7 +251,7 @@
                </HBox.margin>
             </Label>
          </HBox>
-         <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="140.0" prefHeight="335.0" prefWidth="700.0" style="-fx-background-color: #FF;" stylesheets="@button_style.css">
+         <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="140.0" prefHeight="335.0" prefWidth="700.0" style="-fx-background-color: #02030A;" stylesheets="@button_style.css">
             <VBox fx:id="membersList" prefHeight="335.0" prefWidth="700.0" spacing="5.0" style="-fx-background-color: #02030A;">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -218,15 +259,7 @@
             </VBox>
          </ScrollPane>
          <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
-         <Button fx:id="membersButtonRegister" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="CADASTRAR" textFill="WHITE" />
-      </Pane>
-      <Pane fx:id="stagesPanel" layoutX="10.0" layoutY="10.0" prefHeight="540.0" prefWidth="730.0" visible="false">
-         <Label layoutX="57.0" layoutY="25.0" text="Etapas" textFill="#e7e5e5">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </Label>
-         <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+         <Button fx:id="membersButtonRegister" layoutX="543.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: #CE201C;" text="CADASTRAR NOVO" textFill="WHITE" />
       </Pane>
       <Pane fx:id="settingsPanel" prefHeight="530.0" prefWidth="730.0" visible="false">
          <children>
@@ -247,7 +280,7 @@
             <Button fx:id="settingsButtonSave" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackSaveSettings" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="SALVAR" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane fx:id="memberRegistrationPanel" layoutX="10.0" layoutY="10.0" prefHeight="530.0" prefWidth="730.0" visible="false">
+      <Pane fx:id="memberRegistPanel" layoutX="10.0" layoutY="10.0" prefHeight="530.0" prefWidth="730.0">
          <children>
             <Label layoutX="57.0" layoutY="25.0" text="Cadastro Membro" textFill="#e7e5e5">
                <font>
@@ -260,15 +293,174 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="memberRegistrationName" layoutX="57.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-text-fill: #FFFFFF;" styleClass="text-input" />
+            <TextField fx:id="memberRegistName" layoutX="57.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
             <Label layoutX="397.0" layoutY="107.0" text="Sobrenome" textFill="#ddd9d9">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="memberRegistrationSurname" layoutX="387.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-text-fill: #FFFFFF;" />
+            <TextField fx:id="memberRegistSurname" layoutX="387.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
             <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
-            <Button fx:id="memberRegistrationButtonSave" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackRegistration" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="SALVAR" textFill="WHITE" />
+            <Label layoutX="67.0" layoutY="235.0" text="Turma na primeira etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberRegistDropCourse1" layoutX="57.0" layoutY="265.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="397.0" layoutY="235.0" text="Turma na segunda etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberRegistDropCourse2" layoutX="387.0" layoutY="265.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="67.0" layoutY="356.0" text="Café na primeira etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberRegistDropCoffee1" layoutX="57.0" layoutY="386.0" prefHeight="34.0" prefWidth="280.0" style="-fx-text-fill: #FFFFFF;" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="397.0" layoutY="356.0" text="Café na primeira etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberRegistDropCoffee2" layoutX="389.0" layoutY="386.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Separator layoutX="50.0" layoutY="193.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Button fx:id="memberRegistButtonSave" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackRegistration" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="SALVAR" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="courseRegistPanel" layoutX="10.0" layoutY="10.0" prefHeight="530.0" prefWidth="730.0" visible="false">
+         <children>
+            <Label layoutX="57.0" layoutY="25.0" text="Cadastro Turma" textFill="#e7e5e5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Label layoutX="67.0" layoutY="107.0" text="Nome da Sala" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="courseRegistName" layoutX="57.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="397.0" layoutY="107.0" text="Lotação Máxima" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="courseRegistCapacity" layoutX="387.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Separator layoutX="50.0" layoutY="193.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Button fx:id="courseRegistButtonSave" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackRegistration" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="SALVAR" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="coffeeRegistPanel" prefHeight="530.0" prefWidth="730.0" visible="false">
+         <children>
+            <Label layoutX="57.0" layoutY="25.0" text="Cadastro Café" textFill="#e7e5e5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Label layoutX="67.0" layoutY="107.0" text="Nome do Café" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="coffeeRegistName" layoutX="57.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="397.0" layoutY="107.0" text="Lotação Máxima" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="coffeeRegistCapacity" layoutX="387.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Separator layoutX="50.0" layoutY="193.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Button fx:id="coffeeRegistButtonSave" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackRegistration" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #CE201C;" text="SALVAR" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="memberDetailPanel" prefHeight="530.0" prefWidth="730.0" visible="false">
+         <children>
+            <Label layoutX="57.0" layoutY="25.0" text="Detalhes Membro" textFill="#e7e5e5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Label layoutX="67.0" layoutY="107.0" text="Nome" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="memberDetailName" layoutX="57.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="397.0" layoutY="107.0" text="Sobrenome" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="memberDetailSurname" layoutX="387.0" layoutY="137.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Label layoutX="67.0" layoutY="235.0" text="Turma na primeira etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberDetailDropCourse1" disable="true" layoutX="57.0" layoutY="265.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="397.0" layoutY="235.0" text="Turma na segunda etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberDetailDropCourse2" disable="true" layoutX="387.0" layoutY="265.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="67.0" layoutY="356.0" text="Café na primeira etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberDetailDropCoffee1" disable="true" layoutX="57.0" layoutY="386.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Label layoutX="397.0" layoutY="356.0" text="Café na primeira etapa" textFill="#ddd9d9">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="memberDetailDropCoffee2" disable="true" layoutX="389.0" layoutY="386.0" prefHeight="34.0" prefWidth="280.0" styleClass="combo-box" stylesheets="@combo_style.css" />
+            <Separator layoutX="50.0" layoutY="193.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Button fx:id="memberDetailButtonEdit" layoutX="553.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackRegistration" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: #FCBB31;" text="EDITAR" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="roomDetailPanel" layoutX="10.0" layoutY="10.0" prefHeight="540.0" prefWidth="730.0" visible="false">
+         <children>
+            <Label fx:id="roomDetailTitle" layoutX="57.0" layoutY="25.0" text="Detalhes Turma" textFill="#e7e5e5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Separator layoutX="50.0" layoutY="85.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <HBox alignment="CENTER_LEFT" layoutY="100.0" prefHeight="40.0" prefWidth="730.0" spacing="80.0" style="-fx-background-color: #02030A;">
+               <children>
+                  <Label text="Matrícula" textFill="#e7e5e5">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Nome Completo" textFill="#e7e5e5">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="140.0" prefHeight="335.0" prefWidth="700.0" style="-fx-background-color: #02030A;" stylesheets="@button_style.css">
+               <content>
+                  <VBox fx:id="roomDetailMemberList" prefHeight="335.0" prefWidth="700.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Separator layoutX="50.0" layoutY="480.0" opacity="0.15" prefHeight="3.0" prefWidth="630.0" />
+            <Button fx:id="roomDetailButtonNextStage" layoutX="543.0" layoutY="492.0" mnemonicParsing="false" onAction="#callbackHandleClicks" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: #CE201C;" text="IR PARA 2 ETAPA" textFill="WHITE" />
          </children>
       </Pane>
    </StackPane>

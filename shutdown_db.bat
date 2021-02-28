@@ -1,0 +1,1 @@
+.\deps\bin\mongo\mongo.exe --eval "db.getSiblingDB('admin').shutdownServer()" --port 27017

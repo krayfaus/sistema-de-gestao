@@ -1,0 +1,1 @@
+start .\deps\bin\mongo\mongod.exe --nojournal --dbpath ".\data\db"

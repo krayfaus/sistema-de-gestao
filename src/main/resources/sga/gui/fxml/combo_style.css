@@ -1,0 +1,22 @@
+.combo-box {
+  -fx-background-color: #2A0033;
+  -fx-border-color: #9643A9;
+  -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .cell {
+  -fx-background-color: #02030A;
+  -fx-text-fill: #FFFFFF;
+}
+
+.combo-box .cell:selected {
+  -fx-background-color: #2A0033;
+  -fx-text-fill: #FFFFFF;
+}
+
+.combo-box:disabled {
+  -fx-background-color: #2A0033;
+  -fx-border-color: #9643A9;
+  -fx-text-fill: #FFFFFF;
+  -fx-opacity: 1;
+}

@@ -13,9 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import sga.core.*;
+import sga.util.Pair;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -35,8 +38,6 @@ public class CtrHome implements Initializable {
     @FXML
     private Button globalMenuButtonMembers;
     @FXML
-    private Button globalMenuButtonStages;
-    @FXML
     private Button globalMenuButtonSettings;
     @FXML
     private Button globalMenuButtonExit;
@@ -44,14 +45,6 @@ public class CtrHome implements Initializable {
     // Home Panel
     @FXML
     private Pane homePanel;
-    @FXML
-    private Pane homeInfoStages;
-    @FXML
-    private Pane homeInfoCourses;
-    @FXML
-    private Pane homeInfoMembers;
-    @FXML
-    private Pane homeInfoCoffees;
     @FXML
     private Label homeInfoStagesCount;
     @FXML
@@ -66,12 +59,16 @@ public class CtrHome implements Initializable {
     private Pane coursesPanel;
     @FXML
     private VBox coursesList;
+    @FXML
+    private Button coursesButtonRegister;
 
     // Coffees Panel
     @FXML
     private Pane coffeesPanel;
     @FXML
     private VBox coffeesList;
+    @FXML
+    private Button coffeesButtonRegister;
 
     // Members Panel
     @FXML
@@ -80,10 +77,6 @@ public class CtrHome implements Initializable {
     private VBox membersList;
     @FXML
     private Button membersButtonRegister;
-
-    // Stages Panel
-    @FXML
-    private Pane stagesPanel;
 
     // Settings Panel
     @FXML
@@ -97,40 +90,87 @@ public class CtrHome implements Initializable {
 
     // Course Registration Panel
     @FXML
-    private Pane courseRegistrationPanel;
+    private Pane courseRegistPanel;
     @FXML
-    private Button courseRegistrationButtonSave;
+    private TextField courseRegistName;
+    @FXML
+    private TextField courseRegistCapacity;
+    @FXML
+    private ComboBox memberRegistDropCourse1;
+    @FXML
+    private ComboBox memberRegistDropCourse2;
+    @FXML
+    private ComboBox memberRegistDropCoffee1;
+    @FXML
+    private ComboBox memberRegistDropCoffee2;
+    @FXML
+    private Button courseRegistButtonSave;
 
     // Coffee Registration Panel
     @FXML
-    private Pane coffeeRegistrationPanel;
+    private Pane coffeeRegistPanel;
     @FXML
-    private Button coffeeRegistrationButtonSave;
+    private TextField coffeeRegistName;
+    @FXML
+    private TextField coffeeRegistCapacity;
+    @FXML
+    private Button coffeeRegistButtonSave;
 
     // Member Registration Panel
     @FXML
-    private Pane memberRegistrationPanel;
+    private Pane memberRegistPanel;
     @FXML
-    private TextField memberRegistrationName;
+    private TextField memberRegistName;
     @FXML
-    private TextField memberRegistrationSurname;
+    private TextField memberRegistSurname;
     @FXML
-    private Button memberRegistrationButtonSave;
+    private Button memberRegistButtonSave;
+
+
+    // Member Detailed Panel
+    @FXML
+    private Pane memberDetailPanel;
+    @FXML
+    private TextField memberDetailName;
+    @FXML
+    private TextField memberDetailSurname;
+    @FXML
+    private Button memberDetailButtonEdit;
+    @FXML
+    private ComboBox memberDetailDropCourse1;
+    @FXML
+    private ComboBox memberDetailDropCourse2;
+    @FXML
+    private ComboBox memberDetailDropCoffee1;
+    @FXML
+    private ComboBox memberDetailDropCoffee2;
+
+    // Course/Coffee Detailed Panel
+    @FXML
+    private Pane roomDetailPanel;
+    @FXML
+    private Label roomDetailTitle;
+    @FXML
+    private VBox roomDetailMemberList;
+    @FXML
+    private Button roomDetailButtonNextStage;
 
     // Data Access Objects
     private Dao<Member> membersDao;
     private Dao<Room> coursesDao;
     private Dao<Room> coffeesDao;
 
-    //
+    // Constants
     int stageCount = 2;
+    public static final String DEFAULT_COMBOBOX_VALUE = "Selecionar Automaticamente";
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String connectionString = "mongodb://localhost:27017/test";
         try {
-            MongoClient mongoClient = MongoClients.create(connectionString);
-            MongoDatabase db = mongoClient.getDatabase("test");
+            MongoClient client = MongoClients.create(connectionString);
+            MongoDatabase db = client.getDatabase("test");
             membersDao = new MemberDao(db.getCollection("members"));
             coursesDao = new RoomDao(db.getCollection("courses"));
             coffeesDao = new RoomDao(db.getCollection("coffees"));
@@ -147,19 +187,25 @@ public class CtrHome implements Initializable {
             showPanelHome();
         }
         if (actionEvent.getSource() == globalMenuButtonCourses) {
-            showPanelCourses();
+            showCoursesPanel();
         }
         if (actionEvent.getSource() == globalMenuButtonCoffees) {
-            showPanelCoffees();
+            showCoffeesPanel();
         }
         if (actionEvent.getSource() == globalMenuButtonMembers) {
-            showPanelMembers();
+            showMembersPanel();
         }
         if (actionEvent.getSource() == globalMenuButtonSettings) {
-            showPanelSettings();
+            showPanel(settingsPanel);
+        }
+        if (actionEvent.getSource() == coursesButtonRegister) {
+            showCourseRegistPanel();
+        }
+        if (actionEvent.getSource() == coffeesButtonRegister) {
+            showCoffeeRegistPanel();
         }
         if (actionEvent.getSource() == membersButtonRegister) {
-            showMemberRegistrationPanel();
+            showMemberRegistPanel();
         }
 
         // Fechar o programa a pedido do usuário.
@@ -168,19 +214,98 @@ public class CtrHome implements Initializable {
         }
     }
 
-    /**
-     * TODO: Salvar o último código disponível para cadastro.
-     */
+    public void showErrorPopup(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.setTitle("");
+        alert.setHeaderText("Dados Inválidos");
+        alert.showAndWait();
+    }
+
     public void callbackRegistration(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == memberRegistrationButtonSave) {
-            String name = memberRegistrationName.getText();
-            String surname = memberRegistrationSurname.getText();
+        if (actionEvent.getSource() == courseRegistButtonSave) {
+            System.out.println("Cadastrando Curso!");
+            String id = "SALA" + String.format("%03d", coursesDao.count() + 1);
+            String name = courseRegistName.getText();
+            String cap = courseRegistCapacity.getText();
+            if (name == "") {
+                showErrorPopup("Favor preencher corretamente o nome da sala.");
+                return;
+            }
+            if (cap == "" || !cap.matches("-?\\d+")) {
+                showErrorPopup("Favor preencher corretamente a capacidade da sala.");
+                return;
+            }
+            coursesDao.create(new Room(id, name, Integer.parseInt(cap)));
+            showCoursesPanel();
+        }
+        if (actionEvent.getSource() == coffeeRegistButtonSave) {
+            System.out.println("Cadastrando Café!");
+            String id = "CAFE" + String.format("%03d", coffeesDao.count() + 1);
+            String name = coffeeRegistName.getText();
+            String cap = coffeeRegistCapacity.getText();
+            if (name == "") {
+                showErrorPopup("Favor preencher corretamente o nome do café.");
+                return;
+            }
+            if (cap == "" || !cap.matches("-?\\d+")) {
+                showErrorPopup("Favor preencher corretamente a capacidade do café.");
+                return;
+            }
+            coffeesDao.create(new Room(id, name, Integer.parseInt(cap)));
+            showCoffeesPanel();
+        }
+        if (actionEvent.getSource() == memberRegistButtonSave) {
+            String name = memberRegistName.getText();
+            String surname = memberRegistSurname.getText();
+            if (name == "") {
+                showErrorPopup("Favor preencher corretamente o nome do membro.");
+                return;
+            }
+            if (surname == "") {
+                showErrorPopup("Favor preencher corretamente o sobrenome do membro.");
+                return;
+            }
+
+            // TODO: Salvar o último código de membro disponível para cadastro.
             String id = "2021" + String.format("%04d", membersDao.count() + 1);
-            Member member = new Member(id, name, surname);
+
+            List<Pair<String, String>> stages = new ArrayList<>();
+            stages.add(new Pair(
+                getRoomForStage(0, coursesDao, id),
+                getRoomForStage(0, coffeesDao, id)
+            ));
+            stages.add(new Pair(
+                getRoomForStage(1, coursesDao, id),
+                getRoomForStage(1, coffeesDao, id)
+            ));
+
+            Member member = new Member(id, name, surname, stages);
             membersDao.create(member);
 
-            showPanelMembers();
+            showMembersPanel();
         }
+    }
+
+    public String getRoomForStage(int stageId, Dao<Room> rooms, String member_id) {
+        int minMemberCount = Integer.MAX_VALUE;
+        Room selectedRoom = null;
+        for (Room room : rooms.readAll()) {
+            int memberCount = room.member_ids().get(stageId).size();
+            if (memberCount < minMemberCount) {
+                System.out.println(room.name());
+                System.out.println("memberCount" + Integer.toString(memberCount)
+                        + " | minMemberCount" + Integer.toString(minMemberCount));
+                minMemberCount = memberCount;
+                selectedRoom = room;
+            }
+        }
+        if (selectedRoom != null) {
+            selectedRoom.addMember(stageId, member_id);
+            rooms.update(selectedRoom);
+            return selectedRoom.id();
+        }
+
+        return "";
     }
 
     public void callbackSaveSettings(ActionEvent actionEvent) {
@@ -213,30 +338,48 @@ public class CtrHome implements Initializable {
         }
     }
 
+    private void showPanel(Pane panel) {
+        hideChildren(globalContentPanel);
+        panel.setVisible(true);
+        panel.toFront();
+    }
+
     public void showPanelHome() {
         homeInfoStagesCount.setText(String.valueOf(stageCount));
         homeInfoCoursesCount.setText(String.valueOf(coursesDao.count()));
         homeInfoCoffeesCount.setText(String.valueOf(coffeesDao.count()));
         homeInfoMembersCount.setText(String.valueOf(membersDao.count()));
 
-        hideChildren(globalContentPanel);
-        homePanel.setVisible(true);
-        homePanel.toFront();
+        showPanel(homePanel);
     }
 
-    public void showPanelCourses() {
-        hideChildren(globalContentPanel);
-        coursesPanel.setVisible(true);
-        coursesPanel.toFront();
+    private void showCoursesPanel() {
+        coursesList.getChildren().clear();
+        List<Room> courses = coursesDao.readAll();
+        for (Room course : courses) {
+            HBox hBox = JavaFxElements.createRoom(course);
+            VBox vBox = (VBox) hBox.getChildren().get(1);
+            Button btn = (Button) vBox.getChildren().get(0);
+            btn.setOnMousePressed(event -> showRoomDetails(course));
+            coursesList.getChildren().add(hBox);
+        }
+        showPanel(coursesPanel);
     }
 
-    public void showPanelCoffees() {
-        hideChildren(globalContentPanel);
-        coffeesPanel.setVisible(true);
-        coffeesPanel.toFront();
+    private void showCoffeesPanel() {
+        coffeesList.getChildren().clear();
+        List<Room> coffees = coffeesDao.readAll();
+        for (Room coffee : coffees) {
+            HBox hBox = JavaFxElements.createRoom(coffee);
+            VBox vBox = (VBox) hBox.getChildren().get(1);
+            Button btn = (Button) vBox.getChildren().get(0);
+            btn.setOnMousePressed(event -> showRoomDetails(coffee));
+            coffeesList.getChildren().add(hBox);
+        }
+        showPanel(coffeesPanel);
     }
 
-    public void showPanelMembers() {
+    public void showMembersPanel() {
         membersList.getChildren().clear();
         List<Member> members = membersDao.readAll();
         for (Member member : members) {
@@ -246,42 +389,75 @@ public class CtrHome implements Initializable {
             btn.setOnMousePressed(event -> showMemberDetails(member));
             membersList.getChildren().add(hBox);
         }
-
-        hideChildren(globalContentPanel);
-        membersPanel.setVisible(true);
-        membersPanel.toFront();
-    }
-
-    private void showPanelSettings() {
-        hideChildren(globalContentPanel);
-        settingsPanel.setVisible(true);
-        settingsPanel.toFront();
+        showPanel(membersPanel);
     }
 
     public void showMemberDetails(Member member) {
         System.out.println(member.toString());
-        memberRegistrationName.setText(member.name());
-        memberRegistrationName.setDisable(true);
-        memberRegistrationSurname.setText(member.surname());
-        memberRegistrationSurname.setDisable(true);
-        showMemberRegistrationPanel();
+        memberDetailName.setText(member.name());
+        memberDetailName.setDisable(true);
+        memberDetailSurname.setText(member.surname());
+        memberDetailSurname.setDisable(true);
+
+        clearAndFillComboboxRoom(memberDetailDropCourse1, coursesDao.readAll());
+        clearAndFillComboboxRoom(memberDetailDropCourse2, coursesDao.readAll());
+        clearAndFillComboboxRoom(memberDetailDropCoffee1, coffeesDao.readAll());
+        clearAndFillComboboxRoom(memberDetailDropCoffee2, coffeesDao.readAll());
+
+        memberDetailDropCourse1.setValue(member.stages().get(0).first());
+        memberDetailDropCoffee1.setValue(member.stages().get(0).second());
+        memberDetailDropCourse2.setValue(member.stages().get(1).first());
+        memberDetailDropCoffee2.setValue(member.stages().get(1).second());
+
+        showPanel(memberDetailPanel);
     }
 
-    private void showCourseRegistrationPanel() {
-        hideChildren(globalContentPanel);
-        courseRegistrationPanel.setVisible(true);
-        courseRegistrationPanel.toFront();
+    public void showRoomDetails(Room course) {
+        roomDetailMemberList.getChildren().clear();
+        List<String> member_ids = course.member_ids().get(0);
+        for (String m_id : member_ids) {
+            Member member = membersDao.read(m_id).get();
+            HBox hBox = JavaFxElements.createMember(member);
+            VBox vBox = (VBox) hBox.getChildren().get(1);
+            Button btn = (Button) vBox.getChildren().get(0);
+            btn.setOnMousePressed(event -> showMemberDetails(member));
+            roomDetailMemberList.getChildren().add(hBox);
+        }
+        showPanel(roomDetailPanel);
     }
 
-    private void showCoffeeRegistrationPanel() {
-        hideChildren(globalContentPanel);
-        coffeeRegistrationPanel.setVisible(true);
-        coffeeRegistrationPanel.toFront();
+    void clearAndFillComboboxRoom(ComboBox comboBox, List<Room> rooms) {
+        comboBox.getItems().clear();
+        comboBox.getItems().add(DEFAULT_COMBOBOX_VALUE);
+        comboBox.getSelectionModel().select(0);
+
+        for (Room room : rooms) {
+            comboBox.getItems().add(room.id());
+        }
     }
 
-    private void showMemberRegistrationPanel() {
-        hideChildren(globalContentPanel);
-        memberRegistrationPanel.setVisible(true);
-        memberRegistrationPanel.toFront();
+    private void showMemberRegistPanel() {
+        memberRegistName.setText("");
+        memberRegistSurname.setText("");
+        clearAndFillComboboxRoom(memberRegistDropCourse1, coursesDao.readAll());
+        clearAndFillComboboxRoom(memberRegistDropCourse2, coursesDao.readAll());
+        clearAndFillComboboxRoom(memberRegistDropCoffee1, coffeesDao.readAll());
+        clearAndFillComboboxRoom(memberRegistDropCoffee2, coffeesDao.readAll());
+        memberRegistDropCourse1.setDisable(true);
+        memberRegistDropCourse2.setDisable(true);
+        memberRegistDropCoffee1.setDisable(true);
+        memberRegistDropCoffee2.setDisable(true);
+
+        showPanel(memberRegistPanel);
+    }
+
+    private void showCourseRegistPanel() {
+        courseRegistName.setText("Sala #" + String.format("%02d", coursesDao.count() + 1));
+        showPanel(courseRegistPanel);
+    }
+
+    private void showCoffeeRegistPanel() {
+        coffeeRegistName.setText("Café #" + String.format("%02d", coffeesDao.count() + 1));
+        showPanel(coffeeRegistPanel);
     }
 }
